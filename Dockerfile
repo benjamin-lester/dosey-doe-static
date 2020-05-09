@@ -1,4 +1,6 @@
-FROM gatsbyjs/gatsby:onbuild as build
-
-FROM gatsbyjs/gatsby
-COPY --from=build /app/public /pub
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install nginx -y
+COPY index.html /var/www/html/
+EXPOSE 80
+CMD ["nginx","-g","daemon off;"]
